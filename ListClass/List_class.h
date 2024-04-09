@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cassert>
 #include "TestProject.h"
-
+//Пинчукова Гера ивт-22
 using namespace std;
 
 #pragma once
@@ -15,7 +15,7 @@ public:
     Node<T>* next;          // Указатель на следующий узел
 
 
-    // Конструктор узла с инициализацией членов списка
+    // Конструктор узла с парамерами
     Node(T value) : data(value), prev(nullptr), next(nullptr) {}
 
     // Конструктор узла по умолчанию
@@ -23,7 +23,7 @@ public:
 
     // Деструктор узла
     ~Node() {
-        if ( prev != nullptr && next != nullptr)
+        if ( prev != nullptr )
         {
             prev = nullptr;  // Обнуляем указатель на предыдущий узел
             next = nullptr;  // Обнуляем указатель на следующий узел
@@ -37,10 +37,10 @@ class DoublyLinkedList {
 private:
     Node<T>* head;  //указатель на голову списка
     Node<T>* tail;  //указатель на хвост списка
-    size_t size;       // переменная, которая хранит размер списка
+    size_t size;    // переменная, которая хранит размер списка
 
 public:
-    // Конструктор двусвязного списка
+    // Конструктор двусвязного списка по умолчанию
     DoublyLinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
     // Деструктор двусвязного списка
@@ -56,11 +56,11 @@ public:
     }
 
     //получение размер списка O(1)
-    size_t getSize() {
+    size_t getSize() const{
         return size;
     }
 
-    // Метод вставки элемента в список
+    // Метод вставки элемента в список (индекс и значение)
     // начало О(1)
     // конец О(1) тк только обновление 
     // середина O(n)
@@ -115,7 +115,7 @@ public:
         size++;  // Увеличиваем размер списка
     }
 
-    // Метод удаления элемента из списка
+    // Метод удаления элемента из списка (передается индекс index)
     // начало О(1)
     // конец О(1) тк только обновление 
     // середина O(n)
@@ -171,19 +171,61 @@ public:
         size--;  // Уменьшаем размер списка
     }
 
-
-
-
-
-    //Метод ищет элемент (element) в массиве и возвращает его индекс. Если элемент не найден, возвращает -1
-      //строки 
-    long long Search(T element) {
-
-        return findElement(Node, size-1, element);
+    // Метод очистки списка
+    void clearList() {
+        Node<T>* current = head;
+        while (current != nullptr) {
+            Node<T>* temp = current;
+            current = current->next;
+            delete temp;  // Освобождаем память для каждого узла
+        }
+        head = nullptr;  // Обнуляем указатель на голову
+        tail = nullptr;  // Обнуляем указатель на хвост
+        size = 0;  // Сбрасываем размер списка
     }
 
+    // Метод сортировки списка
+    void sort() {
+        Node<T>* current = head;
+        while (current != nullptr) {
+            Node<T>* minNode = current;
+            Node<T>* temp = current->next;
+            while (temp != nullptr) {
+                if (temp->data < minNode->data) {
+                    minNode = temp;
+                }
+                temp = temp->next;
+            }
+            // Обмениваем значения между текущим узлом и узлом с минимальным значением
+            T tempData = current->data;
+            current->data = minNode->data;
+            minNode->data = tempData;
+            current = current->next;
+        }
+    }
+
+    //Метод ищет элемент (element) в массиве и возвращает его индекс. Если элемент не найден, возвращает -1
+    template <typename T>
+    long long findElement(const DoublyLinkedList<T>& list, const T& element) {
+        size_t size = list.getSize();
+
+        Node<T>* current = list.head;
+        for (size_t i = 0; i < size; i++) {
+            if (current->data == element) {
+                return i; // Возвращаем индекс найденного элемента
+            }
+            if (abs(current->data - element) <= 0.00001) {
+                return i;
+            }
+            current = current->next;
+        }
+        return -1; // Возвращаем -1, если элемент не найден
+    }
+
+   
+
     //соеденение двух списков путем переноса указателя
-    //слодность О(n)
+    //сложность О(n)
     void concatenate(DoublyLinkedList& list) {
         // Проверяем, если голова списка, который мы пытаемся добавить, равна nullptr
         if (list.head == nullptr) {
@@ -248,6 +290,7 @@ public:
         // Находим узел с требуемым индексом
         for (size_t i = 0; i < index; i++) {
             current = current->next;
+
         }
         return current->data;  // Возвращаем значение узла
     }
@@ -255,9 +298,10 @@ public:
 
 void assertInsert() {
     DoublyLinkedList<int> list;
+    //проверка вставки 
     // вставка в начало списка
     list.insert(0, 10);
-
+    cout << list[1];
     assert(list.size == 1);
 
     // вставка в конец списка
@@ -268,6 +312,58 @@ void assertInsert() {
     list.insert(1, 15);
     assert(list.size == 3);
 
+    printList();
+
+    //проверка поиска
+    assert(findElement(list, 10) == 0);
+    assert(findElement(list, 13) == -1);
+    assert(findElement(list, 15) == 3);
+
+    //проверка сортировки
+    list.sort();
+    assert(list[0] == 10);
+    assert(list[1] == 15);
+    assert(list[2] == 20);
+
+    assert(list.get(1) == 15);
+
+    list.clearList();
+    assert(list.getSize() == 0);
+    
+
+}
+void assertConcatenate() {
+    DoublyLinkedList<int> list1;
+    DoublyLinkedList<int> list2;
+
+    // Лучший случай: оба списка пустые
+    list1.concatenate(list2);
+    assert(list1.size == 0);
+    assert(list2.size == 0);
+
+    // Худший случай: один из списков пустой, другой -  непустой
+    list1.insert(0, 10);
+    list1.insert(1, 20);
+    list1.insert(2, 30);
+    list2.concatenate(list1);
+    assert(list2.size == 3);
+    assert(list1.size == 0);
+    assert(list2[0] == 10);
+    assert(list2[1] == 20);
+    assert(list2[2] == 30);
+
+    // Средний случай: оба списка непустые
+    DoublyLinkedList<int> list3;
+    list3.insert(0, 40);
+    list3.insert(1, 50);
+    list2.concatenate(list3);
+    assert(list2.size == 5);
+    assert(list2[3] == 40);
+    assert(list2[4] == 50);
+
+    list1.printList();
+    list2.printList();
+    list3.printList();
 }
 
 };

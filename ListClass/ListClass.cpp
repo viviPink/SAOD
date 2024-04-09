@@ -21,6 +21,7 @@ int main()
     list.insert(5, 3);
     list.insert(6, 0);
 
+    list.printList();
 
     cout << list[1] << " ";
     cout << list.get(0) << " ";  
