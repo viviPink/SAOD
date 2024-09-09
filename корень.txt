@@ -1,0 +1,127 @@
+
+#include <iostream>
+
+using namespace std;
+
+template<typename T>
+class TreeNode {
+public:
+    //данные, которые хранятся в узле
+    T data;
+    //указатель на левый узел
+    TreeNode<T>* left;
+    //указатель на правый узел
+    TreeNode<T>* right;
+
+    //конструктор по умолчанию
+    TreeNode() : data(T()), left(nullptr), right(nullptr) {}
+
+    //констртуктор с параметрами
+    TreeNode(const T& data, TreeNode<T>* l = nullptr, TreeNode<T>* r = nullptr) : data(data), left(l), right(r) {}
+};
+
+template<typename T>
+class BinaryTree {
+public:
+    TreeNode<T>* root;
+
+    //удаление дерева
+    void deleteTree(TreeNode<T>* node) {
+        if (node) {
+            deleteTree(node->left);
+            deleteTree(node->right);
+            delete node;
+        }
+    }
+
+
+    BinaryTree() : root(nullptr) {}
+
+    ~BinaryTree() {
+        deleteTree(root);
+    }
+
+    //функция вставки числа в дерево
+    //data- данные для вставки
+    void insert(const T& data) {
+        //динамическое выделение памяти для нового узла 
+        TreeNode<T>* newNode = new TreeNode<T>(data);
+        //проверяем является ли корень null
+        if (!root) {
+            // если да то новый узел это корень
+            root = newNode;
+            return;
+        }
+        //Создается указатель current, который изначально ссылается на корень дерева
+        TreeNode<T>* current = root;
+
+        //Начинается бесконечный цикл, в котором происходит поиск правильного места для вставки нового узла
+        while (true) {
+           //Сравнивается значение data нового узла с значением текущего узла current->data
+           //Если data меньше, то проверяется, есть ли левый потомок у текущего узла
+           //Если есть, то current перемещается влево
+           //Если нет, то новый узел newNode назначается левым потомком текущего узла, и функция insert завершается
+           //Если data больше или равно, то проверяется, есть ли правый потомок у текущего узла
+           //Если есть, то current перемещается вправо
+           //Если нет, то новый узел newNode назначается правым потомком текущего узла, и функция insert завершается
+            if (data < current->data) {
+                if (current->left) {
+                    current = current->left;
+                }
+                else {
+                    current->left = newNode;
+                    return;
+                }
+            }
+            else {
+                if (current->right) {
+                    current = current->right;
+                }
+                else {
+                    current->right = newNode;
+                    return;
+                }
+            }
+        }
+    }
+    //вывод дерева на экран
+    //node-данные дерева
+    //начальный уровень
+    void printTree(TreeNode<T>* node, int level = 0) {
+        // Проверяем, является ли текущий узел null
+        if (node) {
+            // Рекурсивно вызываем функцию для правого поддерева
+            printTree(node->right, level + 1);
+            // Выводим отступ в зависимости от текущего уровня
+            for (int i = 0; i < level; i++) {
+                cout << "   ";
+            }
+            // Выводим значение текущего узла
+            cout << node->data << endl;
+            // Рекурсивно вызываем функцию для левого поддерева
+            printTree(node->left, level + 1);
+        }
+    }
+
+    //получение данных узла
+    const T& getNodeData(TreeNode<T>* node) {
+        return node->data;
+    }
+
+};
+
+int main() {
+    BinaryTree<int> tree;
+    tree.insert(5);
+    tree.insert(3);
+    tree.insert(7);
+    tree.insert(9);
+    tree.insert(6);
+
+    const int& data = tree.getNodeData(tree.root->right);
+    cout << "Data : " << data << endl;
+
+    tree.printTree(tree.root);
+
+    return 0;
+}
