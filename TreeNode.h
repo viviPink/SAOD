@@ -1,4 +1,3 @@
-
 #pragma once
 //Пинчукова Гера ИВТ-22
 #include <iostream>
@@ -108,7 +107,7 @@ public:
 
 
     /// <summary>
-    /// удаление дерева (обход lrn)
+    /// удаление дерева (обход lrn)   оберткаа методы что-то тама
     /// </summary>
     /// <param name="node"> узел который нужно удалить </param>
     void deleteTree(TreeNode<T>* node) {
@@ -161,7 +160,7 @@ public:
         LNR(root, result);
         return result;
     }
-   
+
 
     /// <summary>
     /// NLR прямой обход дерева 
@@ -202,8 +201,9 @@ public:
     /// <summary>
     /// вывод инордерного массива
     /// </summary>
+    template<typename T>
     void printInorder() {
-        vector<Type> result = inorder();
+        vector<T> result = inorder();
         cout << "Inorder" << endl;
         for (size_t i = 0; i < result.size(); i++) {
             cout << result[i] << " ";
@@ -215,7 +215,7 @@ public:
     /// вывод постордерного массива
     /// </summary>
     void printPostorder() {
-        vector<Type> result = postorder();
+        vector<T> result = postorder();
         cout << "Postorder " << endl;
         for (size_t i = 0; i < result.size(); i++) {
             cout << result[i] << " ";
@@ -226,8 +226,9 @@ public:
     /// <summary>
     /// вывод преордерного массива
     /// </summary>
+    template<typename T>
     void printPreorder() {
-        vector<Type> result = preorder();
+        vector<T> result = preorder();
         cout << "Preorder " << endl;
         for (size_t i = 0; i < result.size(); i++) {
             cout << result[i] << " ";
@@ -237,7 +238,7 @@ public:
 
 
 
- };
+};
 
 
 //-------------------------------------------------------------------------------->
@@ -246,41 +247,41 @@ public:
 /// </summary>
 /// <typeparam name="T"> тип данных </typeparam>
 /// <param name="node"> указатель на текущий узел  </param>
- template<typename T>
- void NLR(TreeNode<T>* node, vector<T>& res) {
-     if (node) {
-         result.push_back(node->data);
-         NLRApply(node->left, res);
-         NLRApply(node->right, res);
-     }
- }
+template<typename T>
+void NLR(TreeNode<T>* node, vector<T>& res) {
+    if (node) {
+        result.push_back(node->data);
+        NLRApply(node->left, res);
+        NLRApply(node->right, res);
+    }
+}
 
- /// <summary>
- /// рекурсивная вспомогательная функция LNR симметричного обхода и записи данных в вектор  
- /// </summary>
- /// <param name="node"> указатель на текущий узел </param>
- template<typename T>
- void LNR(TreeNode<T>* node, vector<T>& res) {
-     if (node) {
-         LNRApply(node->left, res);
-         result.push_back(node->data);
-         LNRApply(node->right, res);
-     }
- }
+/// <summary>
+/// рекурсивная вспомогательная функция LNR симметричного обхода и записи данных в вектор  
+/// </summary>
+/// <param name="node"> указатель на текущий узел </param>
+template<typename T>
+void LNR(TreeNode<T>* node, vector<T>& res) {
+    if (node) {
+        LNRApply(node->left, res);
+        result.push_back(node->data);
+        LNRApply(node->right, res);
+    }
+}
 
- /// <summary>
- /// рекурсивная вспомогательная функция LRN обратного обхода и записи данных в вектор  
- /// </summary>
- /// <param name="node"> указатель на текущий узел </param>
- template<typename T>
- void LRN(TreeNode<T>* node, vector<T>& res) {
-     if (node) {
-         LRNApply(node->left, res);
-         LRNApply(node->right, res);
-         res.push_back(node->data);
+/// <summary>
+/// рекурсивная вспомогательная функция LRN обратного обхода и записи данных в вектор  
+/// </summary>
+/// <param name="node"> указатель на текущий узел </param>
+template<typename T>
+void LRN(TreeNode<T>* node, vector<T>& res) {
+    if (node) {
+        LRNApply(node->left, res);
+        LRNApply(node->right, res);
+        res.push_back(node->data);
 
-     }
- }
+    }
+}
 
 
 
@@ -475,8 +476,8 @@ TreeNode<Type>* findMinNode(TreeNode<Type>* node) {
    /// </summary>
    /// <param name="value"> значение элемента, который нужно найти </param>
    /// <returns> указатель на найденный узел или nullptr, если элемент не найден </returns>
-   template <typename Type>
-TreeNode<Type>* find(const Type& value) {
+template <typename T>
+TreeNode<T>* find(const T& value, TreeNode<T>** root) {
     TreeNode<T>* current = root;
     while (current != nullptr) {
         if (current->data == value) {
@@ -497,8 +498,8 @@ TreeNode<Type>* find(const Type& value) {
 /// </summary>
 /// <param name="node"> узел, для которого нужно найти следующий максимальный элемент </param>
 /// <returns> указатель на следующий максимальный узел или nullptr, если такого нет </returns>
-template <typename Type>
-TreeNode<Type>* succ(TreeNode<Type>* node) {
+template <typename T>
+TreeNode<T>* succ(TreeNode<T>* node, TreeNode<T>** root) {
     if (node == nullptr) {
         return nullptr;
     }
@@ -530,68 +531,3 @@ TreeNode<Type>* succ(TreeNode<Type>* node) {
     }
 }
 
-
-///----------------
-int main() {
-    // Создаем узлы
-    TreeNode<int>* node18 = new TreeNode<int>(18);
-    TreeNode<int>* node5 = new TreeNode<int>(5);
-    TreeNode<int>* node20 = new TreeNode<int>(20);
-    TreeNode<int>* node4 = new TreeNode<int>(4);
-    TreeNode<int>* node7 = new TreeNode<int>(7);
-    TreeNode<int>* node21 = new TreeNode<int>(21);
-    TreeNode<int>* node22 = new TreeNode<int>(22);
-
-    // Связываем узлы
-    node18->left = node5;
-    node18->right = node20;
-    node5->left = node4;
-    node5->right = node7;
-    node20->left = node21;
-    node20->right = node22;
-
-    // Создаем дерево
-    BinaryTree<int> tree;
-    tree.root = node18;
-
-    // Проверяем глубину дерева
-    int depth = getDepth(tree.root);
-    cout << "Depth " << depth << endl; // Ожидаемый вывод: 4
-
-    // Проверяем количество узлов в дереве
-    int nodeCount = getNodeCount(tree.root);
-    cout << "Number of nodes  " << nodeCount << endl; // Ожидаемый вывод: 7
-
-    // Удаляем дерево
-    tree.deleteTree(tree.root);
-}
-
-
-int main() {
-    // Создаем дерево
-    BinaryTree<int> tree;
-    tree.insert(18);
-    tree.insert(5);
-    tree.insert(20);
-    tree.insert(4);
-    tree.insert(7);
-    tree.insert(21);  
-    tree.insert(22);
-
-    // Проверяем глубину дерева
-    int depth = getDepth(tree.root);
-    std::cout << "Depth  " << depth << std::endl; // Ожидаемый вывод: 4
-
-    // Проверяем количество узлов в дереве
-    int nodeCount = getNodeCount(tree.root);
-    std::cout << "Number " << nodeCount << std::endl; // Ожидаемый вывод: 7
-
-    // Создаем копию дерева
-    BinaryTree<int> treeCopy;
-    treeCopy.root = copyTree(tree.root);
-
-    // Удаляем узел по значению
-    bool removed = removeNode(&tree.root, 5);
-    std::cout << "Node removed " << removed << std::endl; // Ожидаемый вывод: true
-
-}
