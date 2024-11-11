@@ -1,0 +1,30 @@
+﻿  AVLTree.cpp
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(349,21): error C3861: nodeStack: идентификатор не найден
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(349,21): error C2065: nodeStack: необъявленный идентификатор
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(435,5): error C2039: "n_data": не является членом "AVLTreeNode<T>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(435,5): error C2039:         with
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(435,5): error C2039:         [
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(435,5): error C2039:             T=int
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(435,5): error C2039:         ]
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(437,5): error C2039: "n_data": не является членом "AVLTreeNode<T>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(437,5): error C2039:         with
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(437,5): error C2039:         [
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(437,5): error C2039:             T=int
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(437,5): error C2039:         ]
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(481,5): error C2039: "n_data": не является членом "AVLTreeNode<T>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(481,5): error C2039:         with
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(481,5): error C2039:         [
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(481,5): error C2039:             T=int
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(481,5): error C2039:         ]
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(492,5): error C2039: "n_data": не является членом "AVLTreeNode<T>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(492,5): error C2039:         with
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(492,5): error C2039:         [
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(492,5): error C2039:             T=int
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(492,5): error C2039:         ]
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(509,1): error C2039: "search": не является членом "AVLTree<int>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(510,1): error C2039: "search": не является членом "AVLTree<int>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(511,1): error C2039: "search": не является членом "AVLTree<int>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(512,1): error C2039: "search": не является членом "AVLTree<int>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(513,1): error C2039: "search": не является членом "AVLTree<int>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(516,1): error C2039: "search": не является членом "AVLTree<int>".
+C:\Users\user\Desktop\Саод 5с\AVL\AVLTree\AVLTree\AVLTree.h(517,1): error C2039: "search": не является членом "AVLTree<int>".
